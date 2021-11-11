@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_pet/features/home/presentation/widgets/photo_selected.widget.dart';
 
 class CreatePetPage extends StatelessWidget {
-  const CreatePetPage({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
+
+  CreatePetPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,16 @@ class CreatePetPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24),
               child: Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: (String? value) {
+                        if((value == null) || (value.isEmpty)) {
+                          return 'Por favor ingresa el nombre de la mascota';
+                        }
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         label: Text('Nombre de la mascota'),
                       ),
@@ -33,6 +42,12 @@ class CreatePetPage extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
+                      validator: (String? value) {
+                        if((value == null) || (value.isEmpty)) {
+                          return 'Por favor ingresa la especie de la mascota';
+                        }
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         label: Text('Epecie'),
                       ),
@@ -45,7 +60,9 @@ class CreatePetPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _formKey.currentState!.validate();
+              },
               child: const Text(
                 'Registrar',
                 style: TextStyle(color: Colors.white),

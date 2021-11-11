@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const CreatePetPage(),
+                    builder: (_) => CreatePetPage(),
                   ),
                 ),
                 icon: const Icon(Icons.add),
